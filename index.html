@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>عيد ميلاد سعيد إيلاف</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 450px;
+      animation: fadeIn 2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ff69b4;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      color: #e91e63;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+    .love-msg {
+      font-size: 18px;
+      color: #d81b60;
+      margin: 15px 0;
+    }
+    .poem {
+      text-align: right;
+      font-size: 17px;
+      color: #c2185b;
+      margin-top: 20px;
+      direction: rtl;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #e91e63;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #c2185b;
+    }
+    audio {
+      display: none;
+    }
+    #countdown {
+      font-size: 16px;
+      color: #333;
+      margin-top: 10px;
+    }
+    .floating {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      opacity: 0.7;
+      z-index: 1000;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="elaf.jpg" alt="إيلاف" />
+    <h1>عيد ميلاد سعيد يا إيلاف 🎉</h1>
+
+    <div class="poem">
+      <p>
+        إيلاف يا زهرةً تنمو على جبين الزمان،<br>
+        فيكِ تشرق الشمس ويبتسم المكان...<br>
+        في عيدكِ تغني الطيور، وتتناثر الألحان،<br>
+        يا نبض قلبي، يا أرقَ إنسانة في الأكوان.
+      </p>
+    </div>
+
+    <p class="love-msg">إلى أغلى من سكن القلب، إيلاف 💖<br>
+      في يوم ميلادك، تتفتح الأزهار وتبتسم الحياة.<br>
+      أحبك بكل لحظة، وكل نفس، وكل نبضة قلب.
+    </p>
+    <p>تاريخ الميلاد: 2007/06/15</p>
+    <p id="countdown"></p>
+    <button class="btn" onclick="playSong()">تشغيل أغنية 🎵</button>
+    <audio id="song" src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-1852.mp3"></audio>
+  </div>
+
+  <script>
+    function playSong() {
+      const song = document.getElementById("song");
+      song.play();
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const birthday = new Date(now.getFullYear(), 5, 15);
+      if (now > birthday) birthday.setFullYear(now.getFullYear() + 1);
+      const diff = birthday - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").textContent = `تبقّى ${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية على عيد ميلادك القادم 🎈`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Flying hearts effect
+    const emojis = ['💖', '💗', '💞', '💘', '💝'];
+    setInterval(() => {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (Math.random() * 10 + 20) + 'px';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
+    }, 400);
+  </script>
+</body>
+</html>
